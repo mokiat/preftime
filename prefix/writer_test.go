@@ -19,7 +19,7 @@ var _ = Describe("Writer", func() {
 
 	BeforeEach(func() {
 		out = gbytes.NewBuffer()
-		writer = prefix.NewPrefixWriter(out, prefix.NewIndexPrefixFunction())
+		writer = prefix.NewWriter(out, prefix.IndexFunc())
 	})
 
 	It("should prefix whole lines", func() {

@@ -8,9 +8,9 @@ import (
 	"github.com/mokiat/preftime/prefix"
 )
 
-var _ = Describe("Function", func() {
+var _ = Describe("Func", func() {
 	var (
-		prefixFunc prefix.PrefixFunction
+		prefixFunc prefix.Func
 		out        *gbytes.Buffer
 	)
 
@@ -18,9 +18,9 @@ var _ = Describe("Function", func() {
 		out = gbytes.NewBuffer()
 	})
 
-	Describe("IndexPrefixFunction", func() {
+	Describe("IndexFunc", func() {
 		BeforeEach(func() {
-			prefixFunc = prefix.NewIndexPrefixFunction()
+			prefixFunc = prefix.IndexFunc()
 		})
 
 		It("should write incrementing number", func() {
@@ -45,9 +45,9 @@ var _ = Describe("Function", func() {
 		})
 	})
 
-	Describe("TimePrefixFunction", func() {
+	Describe("TimestampFunc", func() {
 		BeforeEach(func() {
-			prefixFunc = prefix.NewTimePrefixFunction()
+			prefixFunc = prefix.TimestampFunc()
 		})
 
 		It("should write timestamps", func() {
