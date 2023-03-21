@@ -1,6 +1,6 @@
 # preftime
 
-[![Build Status](https://travis-ci.org/mokiat/preftime.png)](https://travis-ci.org/mokiat/preftime)
+![Build Status](https://github.com/mokiat/preftime/workflows/Go/badge.svg)
 [![Go Report Card](https://goreportcard.com/badge/github.com/mokiat/preftime)](https://goreportcard.com/report/github.com/mokiat/preftime)
 
 Preftime is a tool that allows you to prefix the output of another program with timestamp information.
