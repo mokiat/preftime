@@ -10,7 +10,7 @@ import (
 
 func main() {
 	in := os.Stdin
-	out := prefix.NewPrefixWriter(os.Stdout, prefix.NewTimePrefixFunction())
+	out := prefix.NewWriter(os.Stdout, prefix.TimestampFunc())
 
 	_, err := io.Copy(out, in)
 	if err != nil && err != io.EOF {

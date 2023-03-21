@@ -1,67 +1,69 @@
 package prefix_test
 
 import (
-	. "github.com/mokiat/preftime/prefix"
-
-	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
+
+	"github.com/mokiat/preftime/prefix"
 )
 
-var _ = Describe("Function", func() {
-	var prefixFunc PrefixFunction
-	var out *gbytes.Buffer
+var _ = Describe("Func", func() {
+	var (
+		prefixFunc prefix.Func
+		out        *gbytes.Buffer
+	)
 
 	BeforeEach(func() {
 		out = gbytes.NewBuffer()
 	})
 
-	Describe("IndexPrefixFunction", func() {
+	Describe("IndexFunc", func() {
 		BeforeEach(func() {
-			prefixFunc = NewIndexPrefixFunction()
+			prefixFunc = prefix.IndexFunc()
 		})
 
 		It("should write incrementing number", func() {
 			_, err := prefixFunc(out)
-			Ω(err).ShouldNot(HaveOccurred())
-			Ω(out).Should(gbytes.Say("\\[1\\] "))
+			Expect(err).ToNot(HaveOccurred())
+			Expect(out).To(gbytes.Say("\\[1\\] "))
 
 			_, err = prefixFunc(out)
-			Ω(err).ShouldNot(HaveOccurred())
-			Ω(out).Should(gbytes.Say("\\[2\\] "))
+			Expect(err).ToNot(HaveOccurred())
+			Expect(out).To(gbytes.Say("\\[2\\] "))
 		})
 
-		Context("when a write error occurs", func() {
+		When("a write error occurs", func() {
 			BeforeEach(func() {
 				out.Close()
 			})
 
 			It("should report an error", func() {
 				_, err := prefixFunc(out)
-				Ω(err).Should(HaveOccurred())
+				Expect(err).To(HaveOccurred())
 			})
 		})
 	})
 
-	Describe("TimePrefixFunction", func() {
+	Describe("TimestampFunc", func() {
 		BeforeEach(func() {
-			prefixFunc = NewTimePrefixFunction()
+			prefixFunc = prefix.TimestampFunc()
 		})
 
 		It("should write timestamps", func() {
 			_, err := prefixFunc(out)
-			Ω(err).ShouldNot(HaveOccurred())
-			Ω(out).Should(gbytes.Say("\\[\\d\\d\\d\\d-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d.\\d\\d\\d\\] "))
+			Expect(err).ToNot(HaveOccurred())
+			Expect(out).To(gbytes.Say("\\[\\d\\d\\d\\d-\\d\\d-\\d\\d \\d\\d:\\d\\d:\\d\\d.\\d\\d\\d\\] "))
 		})
 
-		Context("when a write error occurs", func() {
+		When("a write error occurs", func() {
 			BeforeEach(func() {
 				out.Close()
 			})
 
 			It("should report an error", func() {
 				_, err := prefixFunc(out)
-				Ω(err).Should(HaveOccurred())
+				Expect(err).To(HaveOccurred())
 			})
 		})
 	})

@@ -1,2 +1,5 @@
-/target
+# MacOS
 .DS_Store
+
+# Distribution
+/target

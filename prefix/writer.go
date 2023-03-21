@@ -5,21 +5,21 @@ import (
 	"io"
 )
 
-func NewPrefixWriter(dest io.Writer, prefixFunc PrefixFunction) io.Writer {
-	return &prefixWriter{
-		beginning:  true,
+func NewWriter(delegate io.Writer, prefixFunc Func) io.Writer {
+	return &writer{
+		delegate:   delegate,
 		prefixFunc: prefixFunc,
-		dest:       dest,
+		beginning:  true,
 	}
 }
 
-type prefixWriter struct {
+type writer struct {
+	delegate   io.Writer
+	prefixFunc Func
 	beginning  bool
-	prefixFunc PrefixFunction
-	dest       io.Writer
 }
 
-func (w *prefixWriter) Write(data []byte) (int, error) {
+func (w *writer) Write(data []byte) (int, error) {
 	dataCount := len(data)
 
 	index := bytes.IndexByte(data, '\n')
@@ -40,15 +40,15 @@ func (w *prefixWriter) Write(data []byte) (int, error) {
 	return dataCount, nil
 }
 
-func (w *prefixWriter) writeSegment(data []byte) error {
+func (w *writer) writeSegment(data []byte) error {
 	if w.beginning {
-		if _, err := w.prefixFunc(w.dest); err != nil {
+		if _, err := w.prefixFunc(w.delegate); err != nil {
 			return err
 		}
 		w.beginning = false
 	}
 
-	if _, err := w.dest.Write(data); err != nil {
+	if _, err := w.delegate.Write(data); err != nil {
 		return err
 	}
 
