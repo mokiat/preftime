@@ -22,7 +22,7 @@ var _ = Describe("Writer", func() {
 
 	It("should prefix whole lines", func() {
 		line := "a whole line\n"
-		count, err := fmt.Fprintf(writer, line)
+		count, err := fmt.Fprint(writer, line)
 		Ω(err).ShouldNot(HaveOccurred())
 		Ω(count).Should(Equal(len(line)))
 		Ω(out).Should(gbytes.Say("\\[1\\] a whole line\n"))
@@ -30,7 +30,7 @@ var _ = Describe("Writer", func() {
 
 	It("should prefix partial lines", func() {
 		line := "a partial line"
-		count, err := fmt.Fprintf(writer, line)
+		count, err := fmt.Fprint(writer, line)
 		Ω(err).ShouldNot(HaveOccurred())
 		Ω(count).Should(Equal(len(line)))
 		Ω(out).Should(gbytes.Say("\\[1\\] a partial line"))
@@ -38,11 +38,11 @@ var _ = Describe("Writer", func() {
 
 	It("should prefix multiple lines", func() {
 		line := "a whole line\nand "
-		firstCount, err := fmt.Fprintf(writer, line)
+		firstCount, err := fmt.Fprint(writer, line)
 		Ω(err).ShouldNot(HaveOccurred())
 		Ω(firstCount).Should(Equal(len(line)))
 		line = "a partial one"
-		secondCount, err := fmt.Fprintf(writer, line)
+		secondCount, err := fmt.Fprint(writer, line)
 		Ω(err).ShouldNot(HaveOccurred())
 		Ω(secondCount).Should(Equal(len(line)))
 
