@@ -1,8 +1,9 @@
 package main
 
 import (
-	"fmt"
+	"errors"
 	"io"
+	"log"
 	"os"
 
 	"github.com/mokiat/preftime/prefix"
@@ -13,8 +14,7 @@ func main() {
 	out := prefix.NewWriter(os.Stdout, prefix.TimestampFunc())
 
 	_, err := io.Copy(out, in)
-	if err != nil && err != io.EOF {
-		fmt.Fprintf(os.Stderr, "preftime error: %s\n", err)
-		os.Exit(1)
+	if err != nil && !errors.Is(err, io.EOF) {
+		log.Fatalf("Error: %v", err)
 	}
 }
