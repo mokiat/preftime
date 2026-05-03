@@ -5,7 +5,7 @@
 
 Preftime is a tool that allows you to prefix the output of another program with timestamp information.
 
-Ideally, the program you are running should have the capability to log timestamps on its own. Alternatively, you could check whether you terminal supports such a feature. However, I have been in situations where neither option was available. I ended up writing these few lines of code and decided to share it with anyone who may need it.
+Ideally, the program you are running should have the capability to log timestamps on its own. Alternatively, you could check whether your terminal supports such a feature. However, I have been in situations where neither option was available. I ended up writing these few lines of code and decided to share it with anyone who may need it.
 
 If you have a Go development environment set up, you can use the following command to acquire the tool.
 
@@ -31,7 +31,7 @@ As an alternative, you could do the following.
 
 This redirects both stdout and stderr to preftime. The `>(preftime)` part makes `preftime` behave like a writable file.
 
-Following the same logic, you could have your bash script redirect it's output to preftime.
+Following the same logic, you could have your bash script redirect its output to preftime.
 
 ```sh
 #!/bin/bash -e

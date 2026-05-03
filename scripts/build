@@ -29,5 +29,8 @@ build() {
 }
 
 build "linux" "amd64" "preftime"
+build "linux" "arm64" "preftime"
 build "windows" "amd64" "preftime.exe"
+build "windows" "arm64" "preftime.exe"
 build "darwin" "amd64" "preftime"
+build "darwin" "arm64" "preftime"
