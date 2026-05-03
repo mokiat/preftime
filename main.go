@@ -1,7 +1,6 @@
 package main
 
 import (
-	"errors"
 	"io"
 	"log"
 	"os"
@@ -13,8 +12,7 @@ func main() {
 	in := os.Stdin
 	out := prefix.NewWriter(os.Stdout, prefix.TimestampFunc())
 
-	_, err := io.Copy(out, in)
-	if err != nil && !errors.Is(err, io.EOF) {
+	if _, err := io.Copy(out, in); err != nil {
 		log.Fatalf("Error: %v", err)
 	}
 }
